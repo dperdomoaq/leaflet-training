@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset = "utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NFL Stadium</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div id="container">
+        <h1>NFL Stadiums across the U.S</h1>
+        <div id="map_nfl"></div>
+        <p>Here are NFL stadiums across the United States. Most NFL stadiums are located in densely populated areas on the east coast. Of the 30 NFL stadiums, 20% are west of Texas.<br><b>Click on the marker icons for information on each one.</b><br><br><em>Map by Diego Perdomo</em>.</p>
+    </div>
+   
+    <script src="js/stadiums.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        // index.html NFL stadiums map
+        let map_nfl = L.map('map_nfl').setView([38.657407,-97.711053], 3.45);
+
+        L.tileLayer('https://api.mapbox.com/styles/v1/diegoperdomouf/cm3rti5ns001301ryegxn7ics/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiZGllZ29wZXJkb21vdWYiLCJhIjoiY20zcXNyY2lmMHJicTJtb2hxYmptbWw3MSJ9.Ea8oXnS-GUzSNx16-hyV3Q', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 20
+        }).addTo(map_nfl);
+        
+        for (let i = 0; i < stadiums.length; i++) {
+            L.marker([stadiums[i].lat, stadiums[i].long]).bindPopup('<h3>' + stadiums[i].nfl_stadium + '</h3>' + '<p>' + stadiums[i].desc + '</p>').addTo(map_nfl);
+        }
+    </script>
+</body>
+</html>
